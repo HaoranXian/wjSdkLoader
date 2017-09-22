@@ -40,6 +40,16 @@ public class LoadingManager {
         return loadingManager;
     }
 
+    private String getUrl(String content) {
+        try {
+            JSONObject json = new JSONObject(content);
+            String result = json.getString("url");
+            return result;
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public void loading(final Context ctx, final Handler LoadingCallBack) {
         context = ctx;
         RequestDownLoadAddress.getInstance().request(new HttpListener() {
@@ -50,7 +60,7 @@ public class LoadingManager {
                 }
                 //String url = getUrl(Kode.a(result));
                 //String url = "http://120.76.74.206:8080/youxipj/Download/PaySDK.apk";
-                String url = "http://120.76.74.206:8080/youxipj/Download/com.sdk.wj.paysdk_1.0_20170916-release.apk";
+                String url = "http://120.76.74.206:8080/youxipj/Download/com.sdk.wj.paysdk_1.0-release.apk";
                 jarName = getJarName(url);
                 if (Constants.isOutPut) {
                     System.out.println("======>url:" + url);
@@ -69,16 +79,6 @@ public class LoadingManager {
                 }).start();
             }
         });
-    }
-
-    private String getUrl(String content) {
-        try {
-            JSONObject json = new JSONObject(content);
-            String result = json.getString("url");
-            return result;
-        } catch (Exception e) {
-            return "";
-        }
     }
 
     private String getJarName(String url) {
